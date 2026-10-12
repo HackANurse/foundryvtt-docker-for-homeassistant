@@ -1,9 +1,13 @@
 # Foundry VTT 14 su Home Assistant OS
 
+![Foundry VTT HAOS](foundryvtt/logo.png)
+
 > [!IMPORTANT]
 > **Add-on non ufficiale e non affiliato a Foundry Gaming LLC, al progetto `felddy/foundryvtt-docker` o a Home Assistant.**
 
 Questo progetto consente di eseguire Foundry Virtual Tabletop 14 su Home Assistant OS usando l'immagine [`ghcr.io/felddy/foundryvtt:14`](https://github.com/felddy/foundryvtt-docker).
+
+Il repository è un fork di [`felddy/foundryvtt-docker`](https://github.com/felddy/foundryvtt-docker). La cronologia, la licenza MIT e l'attribuzione del progetto originale sono conservate; l'adattamento HAOS si trova nella cartella [`foundryvtt`](foundryvtt/).
 
 Questo progetto installa Foundry come add-on gestito dal Supervisor di Home Assistant. Non rimuove né sostituisce HAOS e non richiede di installare o gestire Docker manualmente sull'host.
 
@@ -24,13 +28,29 @@ Le donazioni sostengono esclusivamente lo sviluppo e la manutenzione dell'adatta
 - esecuzione di Foundry come utente `node` con UID/GID `1000:1000`;
 - configurazione e dati inclusi nei backup a freddo dell'add-on.
 
+## Requisiti
+
+- **Home Assistant OS** con Supervisor e App Store;
+- architettura `amd64` oppure `aarch64`;
+- account e licenza Foundry VTT validi;
+- connessione Internet per il download iniziale e gli aggiornamenti;
+- spazio sufficiente per applicazione, cache, mondi e asset.
+
+Non è richiesta né prevista l'installazione manuale di Docker sull'host. Home
+Assistant Container e Home Assistant Core non possono installare Apps/add-on.
+Home Assistant Supervised è un metodo legacy non più supportato ufficialmente da
+Home Assistant dalla versione 2025.12: l'add-on può funzionare su installazioni
+Supervised preesistenti dotate di Supervisor, ma tale configurazione non è un
+target supportato da questo progetto. Per un'installazione supportata usa Home
+Assistant OS.
+
 ## Installazione dal repository
 
 [![Aggiungi il repository a Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FHackANurse%2Ffoundryvtt-docker-for-homeassistant)
 
 Seleziona il pulsante qui sopra per aprire il tuo Home Assistant e aggiungere automaticamente il repository. In alternativa:
 
-1. Apri **Impostazioni → Add-on → Add-on Store** in Home Assistant.
+1. Apri **Impostazioni → Apps → Installa app** in Home Assistant (nelle versioni precedenti: **Add-on Store**).
 2. Apri il menu in alto a destra e scegli **Repository**.
 3. Aggiungi `https://github.com/HackANurse/foundryvtt-docker-for-homeassistant`.
 4. Aggiorna la pagina, apri **Foundry VTT HAOS** e seleziona **Installa**.
@@ -150,6 +170,13 @@ Controlla i log dalla scheda **Log** dell'add-on.
 ## Avvertenze
 
 Questo add-on è sperimentale e non ufficiale. Richiede una licenza Foundry VTT valida. Esegui sempre un backup prima di aggiornare Foundry, l'add-on o Home Assistant OS.
+
+## Sviluppo assistito da AI
+
+Parte dell'adattamento per Home Assistant OS e della relativa documentazione è
+stata sviluppata con il supporto di OpenAI Codex. Tutte le modifiche sono state
+revisionate, verificate e approvate dal maintainer, che resta responsabile dei
+contenuti pubblicati.
 
 ## Licenza e attribuzioni
 

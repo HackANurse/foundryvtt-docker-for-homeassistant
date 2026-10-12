@@ -1,320 +1,185 @@
-> [!IMPORTANT]
-> This fork also contains **Foundry VTT HAOS**, an unofficial Home Assistant OS
-> add-on. It is not affiliated with Foundry Gaming LLC, Home Assistant, or the
-> upstream `felddy/foundryvtt-docker` project. See [HAOS.md](HAOS.md) for its
-> installation, usage, licensing, and donation disclosures.
+# Foundry VTT 14 su Home Assistant OS
 
-[![Support the HAOS adaptation on Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Supporta+il+progetto&emoji=%E2%98%95&slug=andybegh&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/andybegh)
-
-Donations support only the independent HAOS adaptation. They do not purchase
-Foundry Virtual Tabletop, a software license, hosting, or server access.
-
----
-
-<div align="center">
-
-<img width="460"
-  src="https://raw.githubusercontent.com/felddy/foundryvtt-docker/develop/assets/logo.png"
-  alt="Docker whale logo carrying the FoundryVTT icosahedron logo while floating
-  in water.">
-</div>
-
-# foundryvtt-docker #
-
-[![Build](https://github.com/felddy/foundryvtt-docker/actions/workflows/build.yml/badge.svg)](https://github.com/felddy/foundryvtt-docker/actions/workflows/build.yml)
-[![CodeQL](https://github.com/felddy/foundryvtt-docker/workflows/CodeQL/badge.svg)](https://github.com/felddy/foundryvtt-docker/actions/workflows/codeql-analysis.yml)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/felddy/foundryvtt-docker/badge)](https://securityscorecards.dev/viewer/?uri=github.com/felddy/foundryvtt-docker)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/5966/badge)](https://bestpractices.coreinfrastructure.org/projects/5966)
-[![SLSA 3](https://slsa.dev/images/gh-badge-level3.svg)](https://slsa.dev)
-
-[![FoundryVTT Release Version: v14.368](https://img.shields.io/badge/release-v14.368-brightgreen?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAAXNSR0IArs4c6QAAAIRlWElmTU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAA6gAwAEAAAAAQAAAA4AAAAATspU+QAAAAlwSFlzAAALEwAACxMBAJqcGAAAAVlpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KTMInWQAAAiFJREFUKBVVks1rE1EUxc+d5tO0prZVSZsUhSBIPyC02ooWurJ0I7rQlRvdC/4N4h9gt7pyoRTswpWgILgQBIOIiC340VhbpC0Ek85MGmPmXc+baWpNGJg77/7uOffeB+z9FHB0FrH9eLwwqpOF0f34KrpsTicW+6L8KE8QhO/n8n1IOgtQHYZA+a/Ai9+Wd6v1g7liq5A2OjKSQNa9hkO4hAzOIylf6CHALk6hoWXsylPkfjyyApaJhVCxmERy5zLSuI7D8h1H5BWht1aBhS6wdI3pN7GabyuyS4JPrchzujmNjDxAVrrRL2PoxRSGxOfjssgEjkkJvVJBWu6h5M7YenvDoOO0OgicD4TPIKWbBG6xvwTaKCMwSU7hKxK6gt8mbsFIMaF5iDyjUg6iPnqc58higCr9fD4iTvWMziAmK2g73f/AADVWX0YXrlChirgOcqL3WXYBYpTfUuxzjkW30dI1C0ZW1RnjMopo4C56MIs6CgQrMER2cJoz9zjdO2iz17g2yZUjqzHWbuA4/ugiEz7DVRe/aLxmcvDQ5Cq+oWGWeDbAgiETXgArrVOFGzR0EkclxrVMcpfLgFThY5roe2yz95ZZkzcbj22+w2VG8Pz6Q/b5Gr6uM9mw04uo6ll4tOlhE8a8xNzGYihCJoT+u3I4kUIp6OM0X9CHHds8frbqsrXlh9CB62nj8L5a9Y4DHR/K68TgcHhoz607Qp34L72X0rdSdM+vAAAAAElFTkSuQmCC)](https://foundryvtt.com/releases/14.368)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://github.com/felddy/foundryvtt-docker/pkgs/container/foundryvtt)
-
-You can get a [Foundry Virtual Tabletop](https://foundryvtt.com) instance up and
-running in minutes using this container.  This image is designed to be secure,
-reliable, compact, and simple to use.  It only requires that you provide the
-credentials or URL needed to download a Foundry Virtual Tabletop distribution.
-
-This README is the reference for the image itself — its
-[tags](#image-tags), [volumes](#volumes), [ports](#ports),
-[environment variables](#environment-variables), and [secrets](#secrets).  For
-step-by-step setups on a particular platform, see the
-[deployment guides](#deployment-guides).
-
-## Prerequisites ##
-
-- An OCI-compatible container runtime such as [Kubernetes](https://kubernetes.io/),
-  [Podman](https://podman.io/), or [Docker](https://docs.docker.com/get-docker/).
-- A [FoundryVTT.com](https://foundryvtt.com/auth/register/) account with a purchased
-  software license.
-
-## Quick start ##
-
-The fastest way to see the server running is a single command.  Your
-[foundryvtt.com](https://foundryvtt.com) credentials let the container install
-and license your server:
-
-```console
-docker run \
-  --env FOUNDRY_USERNAME='<your_username>' \
-  --env FOUNDRY_PASSWORD='<your_password>' \
-  --hostname my_foundry_host \
-  --publish 30000:30000/tcp \
-  --volume <your_data_dir>:/data \
-  ghcr.io/felddy/foundryvtt:14
-```
-
-Then open [http://localhost:30000](http://localhost:30000).
-
-> [!TIP]
-> Don't want to share your password with the container?  Acquire a temporary
-> download URL from the [Purchased Software Licenses
-> page](https://foundryvtt.com/me/licenses) (set `Operating System` to
-> `Node.js`, then use the `🔗 Timed URL` button) and pass it as
-> `FOUNDRY_RELEASE_URL` instead of your username and password.  Sensitive values
-> can also be supplied as [secrets](#using-secrets).
-
-This is enough to try things out.  For a durable, real-world deployment, pick a
-[deployment guide](#deployment-guides) below.
-
-## Configuration ##
-
-[Configuration options](https://foundryvtt.com/article/configuration/) are
-supplied through [environment variables](#environment-variables).  Each time the
-container starts, it generates the configuration files Foundry needs from the
-values of those variables.  This means **changes made in the in-application
-configuration GUI do not persist between container restarts**.  Manage
-configuration through your runtime's environment settings — a `compose.yaml`
-file, a Kubernetes manifest, or similar.  To disable the regeneration of these
-files, set `CONTAINER_PRESERVE_CONFIG` to `true`.
+![Foundry VTT HAOS](foundryvtt/logo.png)
 
 > [!IMPORTANT]
-> Always set a stable hostname for the container (`hostname:` in a `compose.yaml`
-> file, `--hostname` for `docker`/`podman`, or `hostname:` in a pod spec).
-> Foundry binds its software license to the container hostname.  If no hostname
-> is set, the runtime assigns a random container ID on each start, causing
-> license verification to fail after every restart.
+> **Add-on non ufficiale e non affiliato a Foundry Gaming LLC, al progetto `felddy/foundryvtt-docker` o a Home Assistant.**
 
-## Using secrets ##
+Questo progetto consente di eseguire Foundry Virtual Tabletop 14 su Home Assistant OS usando l'immagine [`ghcr.io/felddy/foundryvtt:14`](https://github.com/felddy/foundryvtt-docker).
 
-Sensitive values — your credentials, admin key, or license key — can be supplied
-through a secret file instead of environment variables.  The file may have any
-name, but it must be presented to the container as `config.json`.  See the
-[secrets](#secrets) reference below for the full list of supported keys, and the
-[deployment guides](#deployment-guides) for how to wire up a secret on your
-runtime.
+Il repository è un fork di [`felddy/foundryvtt-docker`](https://github.com/felddy/foundryvtt-docker). La cronologia, la licenza MIT e l'attribuzione del progetto originale sono conservate; l'adattamento HAOS si trova nella cartella [`foundryvtt`](foundryvtt/).
 
-## Deployment guides ##
+Questo progetto installa Foundry come add-on gestito dal Supervisor di Home Assistant. Non rimuove né sostituisce HAOS e non richiede di installare o gestire Docker manualmente sull'host.
 
-The [deployment guides](docs/deployment/README.md) cover each runtime in depth
-and include worked networking examples.  The image is the same everywhere; these
-guides show how to run it well on a given platform.
+## Sostieni il progetto
 
-| Guide | Description |
-| ----- | ----------- |
-| [Kubernetes](docs/deployment/kubernetes/README.md) | Cluster deployment, including running multiple Foundry instances. |
-| [Podman](docs/deployment/podman.md) | Daemonless and rootless, optionally managed by `systemd`. |
-| [Docker Compose](docs/deployment/docker-compose.md) | Single-host setup with the image, configuration, storage, and ports in one file. |
-| [Reverse proxy with Caddy](docs/deployment/reverse-proxy-caddy/README.md) | Automatic HTTPS in front of the server. |
-| [Reverse proxy with nginx](docs/deployment/reverse-proxy-nginx/README.md) | TLS termination with certificates you already have. |
-| [Cloudflare Tunnel](docs/deployment/cloudflare-tunnel/README.md) | Public access without port forwarding or NAT. |
+[![Sostieni FoundryOnHAOS su Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Supporta+il+progetto&emoji=%E2%98%95&slug=andybegh&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/andybegh)
 
-## Updating ##
+Le donazioni sostengono esclusivamente lo sviluppo e la manutenzione dell'adattamento **FoundryOnHAOS**. Non costituiscono l'acquisto di Foundry Virtual Tabletop e non includono software Foundry, chiavi di licenza, accesso a server o servizi di hosting.
 
-The Foundry "Update Software" tab is disabled by default in this container.  To
-upgrade to a new version of Foundry, pull an updated image and recreate the
-container.  Because the recommended `:14` tag tracks the latest
-release for that major version, pulling it fetches the newest version compatible
-with your data.  Your [deployment guide](#deployment-guides) lists the exact
-commands for your runtime.
+## Funzioni
 
-## Image tags ##
+- dati persistenti di Foundry in `/config`;
+- cartelle HAOS `media` e `share` disponibili nel file picker di Foundry;
+- porta esterna modificabile dalla UI di Home Assistant;
+- cache persistente del pacchetto Foundry;
+- aggiornamenti di Foundry installabili dalla sua interfaccia web e conservati ai riavvii;
+- download forzato solo quando richiesto;
+- esecuzione di Foundry come utente `node` con UID/GID `1000:1000`;
+- configurazione e dati inclusi nei backup a freddo dell'add-on.
 
-The images of this container are tagged with [semantic
-versions](https://semver.org) that align with the [version and build of Foundry
-Virtual Tabletop](https://foundryvtt.com/article/versioning/) that they support.
+## Requisiti
 
-> [!TIP]
-> It is recommended that users use the major version tag: `:14` Using the major
-> tag will ensure that you receive the most recent version of the software that
-> is compatible with your saved data, and prevents inadvertent upgrades to a new
-> major version.
+- **Home Assistant OS** con Supervisor e App Store;
+- architettura `amd64` oppure `aarch64`;
+- account e licenza Foundry VTT validi;
+- connessione Internet per il download iniziale e gli aggiornamenti;
+- spazio sufficiente per applicazione, cache, mondi e asset.
 
-| Image:tag | Description |
-| ----------- | ------------- |
-| `ghcr.io/felddy/foundryvtt:14` | The most recent image matching the major version number.  Most users will use this tag. |
-| `ghcr.io/felddy/foundryvtt:14.368` | The most recent image matching the major and minor version numbers. |
-| `ghcr.io/felddy/foundryvtt:14.368.0` | An exact image version. |
-| `ghcr.io/felddy/foundryvtt:release` | The most recent image from the `stable` channel.  These images are **considered stable**, and well-tested.  The `latest` tag always points to the same version as `release`. |
-| `ghcr.io/felddy/foundryvtt:latest` | Same as the `release` tag.  [Why does `latest` == `release`?](https://vsupalov.com/docker-latest-tag/) |
+Non è richiesta né prevista l'installazione manuale di Docker sull'host. Home
+Assistant Container e Home Assistant Core non possono installare Apps/add-on.
+Home Assistant Supervised è un metodo legacy non più supportato ufficialmente da
+Home Assistant dalla versione 2025.12: l'add-on può funzionare su installazioni
+Supervised preesistenti dotate di Supervisor, ma tale configurazione non è un
+target supportato da questo progetto. Per un'installazione supportata usa Home
+Assistant OS.
 
-See the [packages page](https://github.com/felddy/foundryvtt-docker/pkgs/container/foundryvtt)
-for a complete list of available tags.
+## Installazione dal repository
 
-> [!NOTE]
-> Stable releases are also mirrored to [Docker
-> Hub](https://hub.docker.com/repository/docker/felddy/foundryvtt) and can be
-> referenced using the full registry path: `docker.io/felddy/foundryvtt:14`
+[![Aggiungi il repository a Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FHackANurse%2Ffoundryvtt-docker-for-homeassistant)
 
-## Volumes ##
+Seleziona il pulsante qui sopra per aprire il tuo Home Assistant e aggiungere automaticamente il repository. In alternativa:
 
-| Mount point | Purpose                               |
-| ----------- | ------------------------------------- |
-| `/data`     | Configuration, data, and log storage. |
+1. Apri **Impostazioni → Apps → Installa app** in Home Assistant (nelle versioni precedenti: **Add-on Store**).
+2. Apri il menu in alto a destra e scegli **Repository**.
+3. Aggiungi `https://github.com/HackANurse/foundryvtt-docker-for-homeassistant`.
+4. Aggiorna la pagina, apri **Foundry VTT HAOS** e seleziona **Installa**.
+5. Compila le opzioni dell'add-on e avvialo.
 
-## Ports ##
+## Installazione locale su HAOS
 
-The following ports are exposed by this container:
+ Copia la cartella `foundryvtt` di questo progetto in:
 
-| Port    | Purpose                                       |
-| ------- | --------------------------------------------- |
-| `30000` | Foundry Virtual Tabletop server web interface |
-
-## Environment variables ##
-
-### Required variable combinations ###
-
-One of the three combinations of environment variables listed below must be set
-in order for the container to locate and install a Foundry Virtual Tabletop
-distribution.  Although all variables may be specified together, they are
-evaluated in the following order of precedence:
-
- 1. `FOUNDRY_RELEASE_URL`, *or*
- 1. `FOUNDRY_USERNAME` and `FOUNDRY_PASSWORD`, *or*
- 1. `CONTAINER_CACHE`
-
-#### Credentials variables ####
-
-| Name               | Purpose                                                                                                      |
-| ------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `FOUNDRY_PASSWORD` | Account password for foundryvtt.com.  Required for downloading an application distribution.                  |
-| `FOUNDRY_USERNAME` | Account username or email address for foundryvtt.com.  Required for downloading an application distribution. |
-
-***Note:*** `FOUNDRY_USERNAME` and `FOUNDRY_PASSWORD` may be set [using
-secrets](#using-secrets) instead of environment variables.
-
-#### Presigned URL variable ####
-
-| Name                  | Purpose                                                                                                     |
-| --------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `FOUNDRY_RELEASE_URL` | The presigned URL generated from the user's profile.  Required for downloading an application distribution. |
-
-### Optional variables ###
-
-Boolean variables accept `true`/`false` case-insensitively, along with
-`1`/`0`, `yes`/`no`, and `on`/`off`.  An unrecognized value logs a warning
-naming the variable and falls back to that variable's default.  An empty
-*Default* means no value is configured, and Foundry's (or the system's)
-own behavior applies.
-
-| Name | Purpose | Default |
-| ---- | ------- | ------- |
-| `CONTAINER_CACHE` | Set a path to cache downloads of the Foundry distribution archive and speed up subsequent container startups.  The path should be in `/data` or another persistent mount point in the container.  Set to `""` to disable.  The cache may be shared by multiple containers: simultaneous startups coordinate among themselves so each release is downloaded only once.</br>***Note***: When the cache is disabled the container will sleep indefinitely on failure rather than exiting, to prevent a restart loop.  A distribution can be pre-downloaded and placed into a cache directory.  The distribution's name must be of the form: `foundryvtt-14.368.zip`, and its contents must match the version in its name — mislabeled archives are rejected and removed. | `/data/container_cache` |
-| `CONTAINER_CACHE_SIZE` | Set the maximum number of distribution archives to keep in the cache.  The minimum is `1`.  When the limit is exceeded, the least recently *used* archives are removed first — an archive counts as used each time a container installs from it, so a shared cache retains whatever its instances actually run, regardless of version numbers.  Unset to disable cache size management and keep all versions. | |
-| `CONTAINER_PATCHES` | Set a path to a directory of shell scripts to be sourced after Foundry is installed but before it is started.  The path should be in `/data` or another persistent mount point in the container. e.g.; `/data/container_patches`  Patch files are sourced in lexicographic order.  `CONTAINER_PATCHES` are processed after `CONTAINER_PATCH_URLS`. | |
-| `CONTAINER_PATCH_URLS` | Set to a space-delimited list of URLs to be sourced after Foundry is installed but before it is started.  Patch URLs are sourced in the order specified.  `CONTAINER_PATCH_URLS` are processed before `CONTAINER_PATCHES`.  ⚠️ **Only use patch URLs from trusted sources!** | |
-| `CONTAINER_PRESERVE_CONFIG` | Normally new `options.json` and `admin.txt` files are generated by the container at each startup.  Setting this to `true` prevents the container from modifying these files when they exist.  If they do not exist, they will be created as normal. | `false` |
-| `CONTAINER_UMASK` | Control the default permissions on new files and directories created by Foundry VTT. Set the umask to `"0002"` if you need new files to be writable by other users in the same group as the foundry user. If this is empty or not set, the umask will not be changed (the system default is `"0022"`). | |
-| `CONTAINER_URL_FETCH_RETRY` | Number of times to retry fetching the presigned URL using exponential back off.  This behavior is useful in continuous integration environments where multiple parallel workflows can exceed the rate-limit of the URL generation service. | `0` |
-| `CONTAINER_VERBOSE` | Set to `true` to enable verbose logging for the container utility scripts. | `false` |
-| `FOUNDRY_ADMIN_KEY` | Admin password to be applied at startup.  If omitted the admin password will be cleared.  May be set [using secrets](#using-secrets). | |
-| `FOUNDRY_AWS_CONFIG` | An absolute or relative path that points to the [awsConfig.json](https://foundryvtt.com/article/aws-s3/), or `true` for AWS environment variable [credentials evaluation](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html) (e.g. ECS task or EC2 instance roles).  Set to `false` or leave unset to disable. | |
-| `FOUNDRY_COMPRESS_WEBSOCKET` | Set to `true` to enable compression of data sent from the server to the client via websocket. This is recommended for network performance. | `false` |
-| `FOUNDRY_CSS_THEME` | Choose the CSS theme for the setup page.  Valid values are `dark`, `fantasy`, and `scifi`. | `dark` |
-| `FOUNDRY_DEMO_CONFIG` | Demo mode allows you to configure a world which will be automatically launched and reset at a frequency of your choosing.  When the world is reset, it is deactivated.  The source data for the world is restored to its original state using a provided `.zip` file, and the next reset is automatically scheduled.  See: [Configuring demo mode](https://foundryvtt.com/article/configuration/#command-line). | |
-| `FOUNDRY_DELETE_NEDB` | Set to `true` to automatically delete legacy NeDB `.db` files after they have been migrated to the LevelDB format introduced in Version 11.  Enabling this recovers disk space but removes the ability to roll back to a pre-migration state.  Only relevant for data volumes previously used with Foundry Version 10 or earlier. | `false` |
-| `FOUNDRY_HOSTNAME` | A custom hostname to use in place of the host machine's public IP address when displaying the address of the game session. This allows for reverse proxies or DNS servers to modify the public address. | |
-| `FOUNDRY_HOT_RELOAD` | Set to `true` to allow packages to hot-reload certain assets, such as CSS, HTML, and localization files without a full refresh. This setting is only recommended for developers. | `false` |
-| `FOUNDRY_IP_DISCOVERY` | Allow the Foundry server to discover and report the accessibility of the host machine's public IP address and port.  Setting this to `false` may reduce server startup time in instances where this discovery would timeout. | `true` |
-| `FOUNDRY_LANGUAGE` | The default application language, as `<language>.<module>`.  Languages other than English are provided by a translation module that must already be installed in your user data — for example, install the [fr-core](https://foundryvtt.com/packages/fr-core) module and set `fr.fr-core` for French.  The default English translations are built in. | `en.core` |
-| `FOUNDRY_LOCAL_HOSTNAME` | Override the local network address used for invitation links, mirroring the functionality of the `FOUNDRY_HOSTNAME` option which configures the external address. | |
-| `FOUNDRY_LICENSE_KEY` | The license key to install. e.g.; `AAAA-BBBB-CCCC-DDDD-EEEE-FFFF`  If left unset, a license key will be fetched when using account authentication.   If multiple license keys are associated with an account, one will be chosen at random.  Specific licenses can be selected by passing in an integer index.  The first license key being `1`.  May be set [using secrets](#using-secrets). | |
-| `FOUNDRY_LOG_SIZE` | The maximum size a log file can reach before it is rotated.  Units must be included. e.g.; `1024k`, `64m`, `1g`. | |
-| `FOUNDRY_MAX_LOGS` | The maximum number of log files to retain before older ones are deleted. | |
-| `FOUNDRY_MINIFY_STATIC_FILES` | Set to `true` to reduce network traffic by serving minified static JavaScript and CSS files.  Enabling this setting is recommended for most users, but module developers may wish to disable it. | `false` |
-| `FOUNDRY_NO_BACKUPS` | Set to `true` to disable the automatic backup of world data that Foundry creates before performing major version migrations.  Users with an external backup strategy or constrained storage may wish to enable this. | `false` |
-| `FOUNDRY_PASSWORD_SALT` | Custom salt string to be applied to the admin password instead of the default salt string.  May be set [using secrets](#using-secrets). | |
-| `FOUNDRY_PROTOCOL` | If left unset Foundry VTT will bind to IPv4 and IPv6 interfaces.  To limit to IPv4 only, set to `4`.  To limit to IPv6 only set to `6`. | |
-| `FOUNDRY_PROXY_PORT` | Inform the Foundry server that the software is running behind a reverse proxy on some other port. This allows the invitation links created to the game to include the correct external port. | |
-| `FOUNDRY_PROXY_SSL` | Indicates whether the software is running behind a reverse proxy that uses SSL. This allows invitation links and A/V functionality to work as if the Foundry server had SSL configured directly. | `false` |
-| `FOUNDRY_ROUTE_PREFIX` | A string path which is appended to the base hostname to serve Foundry VTT content from a specific namespace. For example setting this to `demo` will result in data being served from `http://x.x.x.x:30000/demo/`. | |
-| `FOUNDRY_SERVICE_CONFIG` | The absolute path inside the container to a service configuration file.  Must be set together with `FOUNDRY_SERVICE_KEY`. | |
-| `FOUNDRY_SERVICE_KEY` | Used in conjunction with `FOUNDRY_SERVICE_CONFIG`.  Setting this without `FOUNDRY_SERVICE_CONFIG` will cause the container to exit with an error. | |
-| `FOUNDRY_SSL_CERT` | An absolute or relative path that points towards a SSL certificate file which is used jointly with the sslKey option to enable SSL and https connections. If both options are provided, the server will start using HTTPS automatically. | |
-| `FOUNDRY_SSL_KEY` | An absolute or relative path that points towards a SSL key file which is used jointly with the sslCert option to enable SSL and https connections. If both options are provided, the server will start using HTTPS automatically. | |
-| `FOUNDRY_TELEMETRY` | Set to `true` to enable FoundryVTT telemetry, `false` to disable.  This option allows the collection of anonymous usage data to help improve FoundryVTT.  It is recommended to explicitly set this value.  Leaving this unset will cause Foundry to prompt the user to make a choice on every launch. | *(prompt)* |
-| `FOUNDRY_TEMP_DIR` | An absolute path to a directory used for temporary storage of package `.zip` archives while they are being downloaded and installed.  When set, archives land outside the user data directory, so only the unpacked content counts against data volume space.  Useful for hosts with constrained `/data` storage. | |
-| `FOUNDRY_UNIX_SOCKET` | An absolute path to a Unix domain socket for the server listener.  When set, Foundry binds to the socket instead of the TCP port, which is useful for local reverse-proxy configurations (e.g. nginx or caddy via socket).  If both a port and a socket path are configured, the socket takes precedence. | |
-| `FOUNDRY_UPNP` | Allow Universal Plug and Play to automatically request port forwarding for the Foundry server port to your local network address. | `false` |
-| `FOUNDRY_UPNP_LEASE_DURATION` | Sets the Universal Plug and Play lease duration, allowing for the possibility of permanent leases for routers which do not support temporary leases.  To define an indefinite lease duration set the value to `0`. | |
-| `FOUNDRY_VERSION` | Version of Foundry Virtual Tabletop to install. | `14.368` |
-| `FOUNDRY_WORLD` | The directory name of the world to launch at system start. | |
-| `TZ` | Container [TZ database name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) | `UTC` |
-| `*_PROXY` | Proxy settings to use during container initialization and by Foundry at runtime.  See [proxy-from-env](https://www.npmjs.com/package/proxy-from-env#environment-variables) for the list of supported environment variable names.  See [proxy-agent](https://www.npmjs.com/package/proxy-agent) for list of supported proxy protocols. | |
-
-### Node.js variables ###
-
-Any [Node.js
-variables](https://nodejs.org/docs/latest-v16.x/api/cli.html#environment-variables)
-(`NODE_*`) supplied to the container will be passed to the underlying Node.js
-server running FoundryVTT.  Listed below are some variables that are
-particularly useful.
-
-| Name | Purpose |
-| ---- | ------- |
-| `NODE_DEBUG` | `,`-separated list of core modules that should print debug information. |
-| `NODE_EXTRA_CA_CERTS` | When set, the well known "root" CAs (like VeriSign) will be extended with the extra certificates.  The file should consist of one or more trusted certificates in PEM format.  A message will be emitted (once) with `process.emitWarning()` if the file is missing or malformed, but any errors are otherwise ignored. |
-| `NODE_OPTIONS` | A space-separated list of command-line options that are interpreted before command-line options, so command-line options will override or compound after anything supplied.  Node.js will exit with an error if an option that is not allowed in the environment is used, such as `-p` or a script file. |
-| `NODE_TLS_REJECT_UNAUTHORIZED` | If the value equals `0`, certificate validation is disabled for TLS connections. This makes TLS, and HTTPS by extension, insecure.  ⚠️ **The use of this environment variable is strongly discouraged.** |
-
-## Secrets ##
-
-| Filename      | Key                     | Purpose                                                 |
-| ------------  | ----------------------- | ------------------------------------------------------- |
-| `config.json` | `foundry_admin_key`     | Overrides `FOUNDRY_ADMIN_KEY` environment variable.     |
-| `config.json` | `foundry_license_key`   | Overrides `FOUNDRY_LICENSE_KEY` environment variable.   |
-| `config.json` | `foundry_password`      | Overrides `FOUNDRY_PASSWORD` environment variable.      |
-| `config.json` | `foundry_password_salt` | Overrides `FOUNDRY_PASSWORD_SALT` environment variable. |
-| `config.json` | `foundry_service_key`   | Overrides `FOUNDRY_SERVICE_KEY` environment variable.   |
-| `config.json` | `foundry_username`      | Overrides `FOUNDRY_USERNAME` environment variable.      |
-
-## Foundry VTT CLI ##
-
-The image bundles the official [Foundry VTT
-CLI](https://github.com/foundryvtt/foundryvtt-cli) as the `fvtt` command.  It
-comes pre-configured with the container's installation and data paths, so
-package development workflows — such as packing and unpacking compendium
-databases — work in a running container without any setup:
-
-```console
-docker exec --interactive --tty <container_name> fvtt package workon "my-module"
-docker exec --interactive --tty <container_name> fvtt package unpack "my-pack"
+```text
+/addons/foundryvtt
 ```
 
-The CLI stores its configuration in `$XDG_DATA_HOME/.fvttrc.yml`, which
-defaults to `/data/.local/share/.fvttrc.yml` in this image so that the
-configuration persists in the data volume and remains writable for any UID the
-container runs as.  Set `XDG_DATA_HOME` to change the location.
+Puoi trasferire i file con un add-on gestito da Home Assistant, per esempio Studio Code Server, Samba share o Terminal & SSH. Poi ricarica gli add-on locali dal menu dell'Add-on Store e installa **Foundry VTT HAOS**. Anche in questo caso il ciclo di vita resta interamente gestito da HAOS: non avviare container Docker manualmente.
 
-> [!NOTE]
-> The CLI is included on every image platform except `s390x`, where its native
-> LevelDB dependency cannot be built.
+## Configurazione
 
-## Building ##
+È necessario fornire uno dei due metodi di download:
 
-Most users should pull a published image.  If you want to build the image
-yourself — from source, for another architecture, or with a distribution
-pre-installed — see the [building guide](docs/building.md).
+- `foundry_username` e `foundry_password`; oppure
+- `foundry_release_url`, usando un URL temporaneo per il pacchetto **Node.js** ottenuto dal sito Foundry VTT.
 
-## Contributing ##
+Opzioni disponibili:
 
-We welcome contributions!  Please see [`CONTRIBUTING.md`](CONTRIBUTING.md) for
-details.
+| Opzione | Valore iniziale | Descrizione |
+| --- | --- | --- |
+| `foundry_username` | vuoto | Username o email dell'account Foundry VTT. |
+| `foundry_password` | vuoto | Password dell'account Foundry VTT. |
+| `foundry_release_url` | vuoto | URL temporaneo alternativo alle credenziali. |
+| `foundry_admin_key` | vuoto | Chiave di accesso alla schermata amministrativa. |
+| `foundry_license_key` | vuoto | Chiave licenza; può anche essere inserita dalla UI di Foundry. |
+| `foundry_telemetry` | `false` | Abilita o disabilita la telemetria Foundry. |
+| `container_preserve_config` | `true` | Non sovrascrive `Config/options.json` e `Config/admin.txt` se esistono. |
+| `force_download` | `false` | Elimina dalla cache il pacchetto della versione corrente e lo scarica di nuovo al prossimo avvio. |
 
-## License ##
+Non inserire credenziali o chiavi direttamente nei file del repository. Salvale esclusivamente nella scheda **Configurazione** dell'add-on.
 
-This project is released as open source under the [MIT license](LICENSE).
+## Porta di rete
 
-All contributions to this project will be released under the same MIT license.
-By submitting a pull request, you are agreeing to comply with this waiver of
-copyright interest.
+Foundry ascolta sulla porta interna `30000`. Nella scheda **Configurazione → Rete** dell'add-on puoi cambiare la porta pubblicata sull'host senza modificare alcun file. Il pulsante **Apri interfaccia web** usa automaticamente la porta scelta.
+
+## Dati persistenti
+
+L'add-on usa `/config` come `dataPath` di Foundry. HAOS monta in quel percorso la cartella `addon_config` dedicata all'add-on. La struttura creata è:
+
+```text
+/config/
+├── Backups/
+├── Config/
+├── Data/
+│   └── assets/
+│       ├── haos-media -> /media
+│       └── haos-share -> /share
+├── Logs/
+├── container_cache/
+└── foundry_app/
+```
+
+Nel file picker di Foundry i contenuti condivisi sono disponibili in:
+
+```text
+Data/assets/haos-media
+Data/assets/haos-share
+```
+
+All'avvio, l'add-on assegna i file persistenti a UID/GID `1000:1000`, usati dall'utente `node` dell'immagine Foundry, e concede lettura/scrittura a proprietario e gruppo.
+
+## Cache e aggiornamenti di Foundry
+
+Il pacchetto scaricato viene conservato in:
+
+```text
+/config/container_cache
+```
+
+Con `force_download: false`, se la cache contiene il pacchetto esatto richiesto dall'immagine `:14`, le credenziali e l'URL non vengono passati al downloader. In caso di nuova build Foundry 14, il primo avvio scarica una volta il pacchetto aggiornato e lo conserva; i riavvii successivi usano la cache.
+
+L'installazione applicativa si trova in `/config/foundry_app`. L'add-on non usa
+`--noupdate`: dalla schermata **Aggiornamento software** di Foundry puoi quindi
+scaricare e installare un aggiornamento, che resta disponibile anche dopo il
+riavvio dell'add-on.
+
+Prima di aggiornare crea un backup completo dell'add-on e arresta i mondi attivi.
+Installa dalla UI soltanto aggiornamenti compatibili con la generazione 14: per
+passare a una nuova generazione serve una versione dell'add-on basata sulla
+corrispondente immagine `felddy`, perché possono cambiare Node.js e le dipendenze
+di sistema.
+
+Per riscaricare intenzionalmente la versione corrente:
+
+1. imposta `force_download: true`;
+2. riavvia l'add-on e attendi il completamento del download;
+3. reimposta `force_download: false`.
+
+Se usi `foundry_release_url`, genera un nuovo URL temporaneo prima di forzare il download.
+
+`force_download: true` elimina anche l'installazione applicativa persistente e
+ripristina la versione prevista dall'immagine dell'add-on. Usalo quindi come
+procedura di recupero o reinstallazione intenzionale, non per un normale riavvio.
+
+## Aggiornamento dell'add-on
+
+Dopo un aggiornamento del repository, usa il pulsante **Aggiorna** nella pagina dell'add-on. Se hai installato la cartella come add-on locale, sostituisci i file, ricarica gli add-on locali e scegli **Aggiorna**. Home Assistant può richiedere una nuova compilazione dell'immagine.
+
+Prima di aggiornare, crea un backup dell'add-on. I dati persistenti si trovano nell'`addon_config` assegnato da HAOS; il prefisso della cartella dipende dal metodo di installazione e dal repository.
+
+## Log e problemi comuni
+
+Controlla i log dalla scheda **Log** dell'add-on.
+
+- **Cache assente:** configura credenziali oppure un URL temporaneo valido.
+- **URL scaduto:** genera un nuovo URL Node.js e salvalo nelle opzioni.
+- **Permessi:** l'avvio riallinea automaticamente `/config` a `1000:1000`.
+- **Link `haos-media` o `haos-share` già esistente come cartella:** per sicurezza l'add-on non lo sovrascrive; rinomina la cartella e riavvia per creare il link.
+- **Porta occupata:** cambia la porta pubblicata nella sezione **Rete** dell'add-on.
+
+## Avvertenze
+
+Questo add-on è sperimentale e non ufficiale. Richiede una licenza Foundry VTT valida. Esegui sempre un backup prima di aggiornare Foundry, l'add-on o Home Assistant OS.
+
+## Sviluppo assistito da AI
+
+Parte dell'adattamento per Home Assistant OS e della relativa documentazione è
+stata sviluppata con il supporto di OpenAI Codex. Tutte le modifiche sono state
+revisionate, verificate e approvate dal maintainer, che resta responsabile dei
+contenuti pubblicati.
+
+## Licenza e attribuzioni
+
+Il codice di questo adattamento HAOS è distribuito con licenza MIT. Il progetto usa l'immagine [`ghcr.io/felddy/foundryvtt:14`](https://github.com/felddy/foundryvtt-docker), il cui progetto originale è distribuito con licenza MIT e attribuito a Mark Feldhousen.
+
+Foundry Virtual Tabletop è software proprietario di Foundry Gaming LLC, non è incluso nella licenza MIT di questo repository e richiede una licenza Foundry valida. Consulta il file [`LICENSE`](LICENSE) per il testo completo, le attribuzioni e i termini applicabili.

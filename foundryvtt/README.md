@@ -18,4 +18,7 @@ Esegue Foundry Virtual Tabletop 14 come add-on gestito da Home Assistant OS usan
 
 Foundry Virtual Tabletop non è incluso nell'add-on. Per utilizzarlo servono un account e una licenza Foundry VTT validi.
 
+Parte del codice e della documentazione dell'adattamento HAOS è stata sviluppata
+con il supporto di OpenAI Codex e revisionata dal maintainer.
+
 Consulta la scheda **Documentazione** dopo l'installazione per la configurazione completa.

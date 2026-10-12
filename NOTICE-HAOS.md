@@ -16,3 +16,8 @@ possess a valid license.
 Donations through [Buy Me a Coffee](https://www.buymeacoffee.com/andybegh)
 support only development and maintenance of the HAOS adaptation. They do not
 provide Foundry software, license keys, hosting, or access to a server.
+
+Parts of the Home Assistant OS adaptation and its documentation were developed
+with assistance from OpenAI Codex. All changes were reviewed, tested, and
+accepted by the project maintainer, who remains responsible for the published
+content.
