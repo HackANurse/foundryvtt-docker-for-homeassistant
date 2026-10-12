@@ -1,0 +1,43 @@
+name: Foundry VTT HAOS
+version: "1.1.0"
+slug: foundryvtt_haos
+description: Foundry Virtual Tabletop 14 per Home Assistant OS
+url: https://github.com/HackANurse/foundryvtt-docker-for-homeassistant
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+init: false
+host_network: false
+host_uts: true
+webui: "http://[HOST]:[PORT:30000]"
+watchdog: "tcp://[HOST]:[PORT:30000]"
+ports:
+  30000/tcp: 30000
+ports_description:
+  30000/tcp: Foundry VTT web interface
+map:
+  - addon_config:rw
+  - media:rw
+  - share:rw
+backup: cold
+stage: experimental
+options:
+  foundry_username: ""
+  foundry_password: ""
+  foundry_release_url: ""
+  foundry_admin_key: ""
+  foundry_license_key: ""
+  foundry_telemetry: false
+  container_preserve_config: true
+  force_download: false
+schema:
+  foundry_username: "str?"
+  foundry_password: "password?"
+  foundry_release_url: "str?"
+  foundry_admin_key: "password?"
+  foundry_license_key: "password?"
+  foundry_telemetry: bool
+  container_preserve_config: bool
+  force_download: bool

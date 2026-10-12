@@ -1,3 +1,16 @@
+> [!IMPORTANT]
+> This fork also contains **Foundry VTT HAOS**, an unofficial Home Assistant OS
+> add-on. It is not affiliated with Foundry Gaming LLC, Home Assistant, or the
+> upstream `felddy/foundryvtt-docker` project. See [HAOS.md](HAOS.md) for its
+> installation, usage, licensing, and donation disclosures.
+
+[![Support the HAOS adaptation on Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Supporta+il+progetto&emoji=%E2%98%95&slug=andybegh&button_colour=FFDD00&font_colour=000000&font_family=Lato&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/andybegh)
+
+Donations support only the independent HAOS adaptation. They do not purchase
+Foundry Virtual Tabletop, a software license, hosting, or server access.
+
+---
+
 <div align="center">
 
 <img width="460"
