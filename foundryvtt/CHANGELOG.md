@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1 - 2026-11-14
+
+- promosso l'add-on dallo stato sperimentale allo stato stabile.
+
 ## 1.2.0 - 2026-11-13
 
 - aggiunti `foundry_target_version` e `install_target_version` per aggiornamenti
