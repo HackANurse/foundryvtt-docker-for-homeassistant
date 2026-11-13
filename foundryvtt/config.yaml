@@ -1,5 +1,5 @@
 name: Foundry VTT HAOS
-version: "1.2.0"
+version: "1.2.1"
 slug: foundryvtt_haos
 description: Foundry Virtual Tabletop 14 per Home Assistant OS
 url: https://github.com/HackANurse/foundryvtt-docker-for-homeassistant
@@ -22,7 +22,7 @@ map:
   - media:rw
   - share:rw
 backup: cold
-stage: experimental
+stage: stable
 options:
   foundry_username: ""
   foundry_password: ""
