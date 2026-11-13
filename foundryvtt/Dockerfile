@@ -1,4 +1,4 @@
-FROM ghcr.io/felddy/foundryvtt:14
+FROM ghcr.io/felddy/foundryvtt:14.370.0
 
 ARG BUILD_VERSION
 ARG BUILD_ARCH
@@ -21,7 +21,8 @@ RUN sed -i 's|/data|/config|g' \
     && apt-get install -y --no-install-recommends gosu \
     && rm -rf /var/lib/apt/lists/*
 
-COPY run.sh /run.sh
-RUN sed -i 's/\r$//' /run.sh && chmod 0755 /run.sh
+COPY run.sh update.sh launch.sh /
+RUN sed -i 's/\r$//' /run.sh /update.sh /launch.sh \
+    && chmod 0755 /run.sh /update.sh /launch.sh
 
 ENTRYPOINT ["/usr/bin/env", "bash", "/run.sh"]

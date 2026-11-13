@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-OPTIONS_PATH="/data/options.json"
-FOUNDRY_DATA_PATH="/config"
+OPTIONS_PATH="${OPTIONS_PATH:-/data/options.json}"
+FOUNDRY_DATA_PATH="${FOUNDRY_DATA_PATH:-/config}"
+FOUNDRY_HOME="${FOUNDRY_HOME:-/home/node}"
+FOUNDRY_UPDATE_LIB="${FOUNDRY_UPDATE_LIB:-/update.sh}"
+FOUNDRY_LAUNCHER="${FOUNDRY_LAUNCHER:-/launch.sh}"
 FOUNDRY_CACHE_PATH="${FOUNDRY_DATA_PATH}/container_cache"
 FOUNDRY_APP_PATH="${FOUNDRY_DATA_PATH}/foundry_app"
 FOUNDRY_RESOURCES_PATH="${FOUNDRY_APP_PATH}/resources"
 IMAGE_FOUNDRY_VERSION="${FOUNDRY_VERSION}"
+
+# shellcheck source=update.sh
+. "${FOUNDRY_UPDATE_LIB}"
 
 value() {
   jq -r "$1 // empty" "${OPTIONS_PATH}"
@@ -28,6 +34,8 @@ ensure_symlink() {
 FOUNDRY_USERNAME_OPT="$(value '.foundry_username')"
 FOUNDRY_PASSWORD_OPT="$(value '.foundry_password')"
 FOUNDRY_RELEASE_URL_OPT="$(value '.foundry_release_url')"
+FOUNDRY_TARGET_VERSION="$(value '.foundry_target_version')"
+INSTALL_TARGET_VERSION="$(value '.install_target_version')"
 FOUNDRY_ADMIN_KEY="$(value '.foundry_admin_key')"
 FOUNDRY_LICENSE_KEY="$(value '.foundry_license_key')"
 FOUNDRY_TELEMETRY="$(value '.foundry_telemetry')"
@@ -54,19 +62,21 @@ mkdir -p \
 # If the upstream image already contains Foundry, seed the persistent location
 # only on the first start.
 if [ ! -f "${FOUNDRY_RESOURCES_PATH}/app/package.json" ] \
-  && [ -f /home/node/resources/app/package.json ]; then
+  && [ -f "${FOUNDRY_HOME}/resources/app/package.json" ]; then
   echo "Inizializzo l'installazione persistente di Foundry in ${FOUNDRY_APP_PATH}."
-  cp -a /home/node/resources/. "${FOUNDRY_RESOURCES_PATH}/"
+  cp -a "${FOUNDRY_HOME}/resources/." "${FOUNDRY_RESOURCES_PATH}/"
 fi
 
 # The upstream entrypoint expects resources relative to /home/node. Point that
 # path at addon_config so both its installer and Foundry's updater write to
 # persistent storage.
-rm -rf /home/node/resources
-ln -s "${FOUNDRY_RESOURCES_PATH}" /home/node/resources
+rm -rf "${FOUNDRY_HOME}/resources"
+ln -s "${FOUNDRY_RESOURCES_PATH}" "${FOUNDRY_HOME}/resources"
 
 # The upstream image runs Foundry as node (uid/gid 1000).
-chown -R 1000:1000 "${FOUNDRY_DATA_PATH}"
+if [ "$(id -u)" -eq 0 ]; then
+  chown -R 1000:1000 "${FOUNDRY_DATA_PATH}"
+fi
 chmod -R u+rwX,g+rwX "${FOUNDRY_DATA_PATH}"
 
 if [ -d /share ]; then
@@ -75,6 +85,28 @@ fi
 
 if [ -d /media ]; then
   ensure_symlink /media "${FOUNDRY_DATA_PATH}/Data/assets/haos-media"
+fi
+
+if [ -f "${FOUNDRY_DATA_PATH}/.foundry-update/pending.json" ]; then
+  echo "Aggiornamento Foundry in attesa di conferma: riprendo il primo avvio senza un nuovo download."
+  if [ "${FORCE_DOWNLOAD}" = "true" ]; then
+    echo "ATTENZIONE: ignoro force_download finche l'aggiornamento in attesa non viene confermato o ripristinato."
+    FORCE_DOWNLOAD=false
+  fi
+elif [ "${INSTALL_TARGET_VERSION}" = "true" ]; then
+  if [ "${FORCE_DOWNLOAD}" = "true" ]; then
+    echo "ERRORE: install_target_version e force_download non possono essere attivi insieme."
+    exit 1
+  fi
+  perform_requested_update \
+    "${FOUNDRY_TARGET_VERSION}" \
+    "${FOUNDRY_RELEASE_URL_OPT}" \
+    "${FOUNDRY_USERNAME_OPT}" \
+    "${FOUNDRY_PASSWORD_OPT}" \
+    "${FOUNDRY_DATA_PATH}"
+elif [ -f "${FOUNDRY_DATA_PATH}/.foundry-update/failed.json" ]; then
+  rm -f "${FOUNDRY_DATA_PATH}/.foundry-update/failed.json"
+  echo "Stato dell'aggiornamento fallito azzerato; puoi richiederlo nuovamente."
 fi
 
 CACHED_RELEASE="${FOUNDRY_CACHE_PATH}/foundryvtt-${IMAGE_FOUNDRY_VERSION}.zip"
@@ -89,7 +121,9 @@ if [ "${FORCE_DOWNLOAD}" = "true" ]; then
   rm -f "${CACHED_RELEASE}"
   rm -rf "${FOUNDRY_RESOURCES_PATH}"
   mkdir -p "${FOUNDRY_RESOURCES_PATH}"
-  chown -R 1000:1000 "${FOUNDRY_APP_PATH}"
+  if [ "$(id -u)" -eq 0 ]; then
+    chown -R 1000:1000 "${FOUNDRY_APP_PATH}"
+  fi
   INSTALLED_RELEASE=""
   export FOUNDRY_VERSION="${IMAGE_FOUNDRY_VERSION}"
   export FOUNDRY_USERNAME="${FOUNDRY_USERNAME_OPT}"
@@ -125,10 +159,11 @@ echo "Foundry data path: ${FOUNDRY_DATA_PATH}"
 echo "Foundry cache path: ${FOUNDRY_CACHE_PATH}"
 echo "Foundry application path: ${FOUNDRY_APP_PATH}"
 echo "force_download: ${FORCE_DOWNLOAD}"
+echo "install_target_version: ${INSTALL_TARGET_VERSION}"
 
-cd /home/node
+cd "${FOUNDRY_HOME}"
 
-exec gosu node:node ./entrypoint.sh \
+exec "${FOUNDRY_LAUNCHER}" gosu node:node ./entrypoint.sh \
   resources/app/main.mjs \
   --port=30000 \
   --headless \

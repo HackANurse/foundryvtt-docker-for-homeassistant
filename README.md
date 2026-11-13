@@ -5,7 +5,7 @@
 > [!IMPORTANT]
 > **Add-on non ufficiale e non affiliato a Foundry Gaming LLC, al progetto `felddy/foundryvtt-docker` o a Home Assistant.**
 
-Questo progetto consente di eseguire Foundry Virtual Tabletop 14 su Home Assistant OS usando l'immagine [`ghcr.io/felddy/foundryvtt:14`](https://github.com/felddy/foundryvtt-docker).
+Questo progetto consente di eseguire Foundry Virtual Tabletop 14 su Home Assistant OS usando l'immagine [`ghcr.io/felddy/foundryvtt:14.370.0`](https://github.com/felddy/foundryvtt-docker).
 
 Il repository è un fork di [`felddy/foundryvtt-docker`](https://github.com/felddy/foundryvtt-docker). La cronologia, la licenza MIT e l'attribuzione del progetto originale sono conservate; l'adattamento HAOS si trova nella cartella [`foundryvtt`](foundryvtt/).
 
@@ -80,6 +80,8 @@ Opzioni disponibili:
 | `foundry_username` | vuoto | Username o email dell'account Foundry VTT. |
 | `foundry_password` | vuoto | Password dell'account Foundry VTT. |
 | `foundry_release_url` | vuoto | URL temporaneo alternativo alle credenziali. |
+| `foundry_target_version` | vuoto | Build 14 da installare manualmente, per esempio `14.370`. |
+| `install_target_version` | `false` | Esegue una volta l'aggiornamento manuale richiesto e verificato. |
 | `foundry_admin_key` | vuoto | Chiave di accesso alla schermata amministrativa. |
 | `foundry_license_key` | vuoto | Chiave licenza; può anche essere inserita dalla UI di Foundry. |
 | `foundry_telemetry` | `false` | Abilita o disabilita la telemetria Foundry. |
@@ -126,7 +128,10 @@ Il pacchetto scaricato viene conservato in:
 /config/container_cache
 ```
 
-Con `force_download: false`, se la cache contiene il pacchetto esatto richiesto dall'immagine `:14`, le credenziali e l'URL non vengono passati al downloader. In caso di nuova build Foundry 14, il primo avvio scarica una volta il pacchetto aggiornato e lo conserva; i riavvii successivi usano la cache.
+Con `force_download: false`, se la cache contiene il pacchetto esatto richiesto
+dall'immagine dell'add-on, credenziali e URL non vengono passati al downloader.
+I riavvii successivi usano la cache; per avanzare volontariamente a un'altra
+build 14 usa l'aggiornamento manuale e transazionale descritto sotto.
 
 L'installazione applicativa si trova in `/config/foundry_app`. L'add-on non usa
 `--noupdate`: dalla schermata **Aggiornamento software** di Foundry puoi quindi
@@ -139,6 +144,26 @@ passare a una nuova generazione serve una versione dell'add-on basata sulla
 corrispondente immagine `felddy`, perché possono cambiare Node.js e le dipendenze
 di sistema.
 
+### Aggiornamento manuale e transazionale
+
+Per scegliere esplicitamente una nuova build 14, imposta
+`foundry_target_version` (per esempio `14.370`) e attiva
+`install_target_version`. Puoi fornire anche un nuovo `foundry_release_url`:
+quando versione e URL sono entrambi presenti, l'archivio deve corrispondere
+esattamente alla versione richiesta. Con la sola versione vengono usate le
+credenziali Foundry; con il solo URL la versione viene ricavata dall'archivio.
+
+Il download viene validato ed estratto in un'area temporanea. L'installazione
+precedente rimane disponibile finché il nuovo processo non apre la porta entro
+180 secondi; in caso contrario viene ripristinata automaticamente. Le cartelle
+`Data`, `Config`, `Backups` e `Logs` non vengono toccate. Dopo il successo
+riporta `install_target_version` a `false`; lasciarlo attivo non ripete la stessa
+richiesta già completata.
+
+Se il primo avvio fallisce, l'add-on non ripete automaticamente il download:
+porta `install_target_version` a `false`, salva e avvia una volta per azzerare
+lo stato, quindi correggi la richiesta prima di riattivarlo.
+
 Per riscaricare intenzionalmente la versione corrente:
 
 1. imposta `force_download: true`;
@@ -148,8 +173,10 @@ Per riscaricare intenzionalmente la versione corrente:
 Se usi `foundry_release_url`, genera un nuovo URL temporaneo prima di forzare il download.
 
 `force_download: true` elimina anche l'installazione applicativa persistente e
-ripristina la versione prevista dall'immagine dell'add-on. Usalo quindi come
-procedura di recupero o reinstallazione intenzionale, non per un normale riavvio.
+ripristina la versione prevista dall'immagine dell'add-on: non cerca la release
+più recente e non può essere usato insieme a `install_target_version`. Usalo
+quindi come procedura di recupero o reinstallazione intenzionale, non per un
+normale riavvio.
 
 ## Aggiornamento dell'add-on
 
@@ -180,6 +207,6 @@ contenuti pubblicati.
 
 ## Licenza e attribuzioni
 
-Il codice di questo adattamento HAOS è distribuito con licenza MIT. Il progetto usa l'immagine [`ghcr.io/felddy/foundryvtt:14`](https://github.com/felddy/foundryvtt-docker), il cui progetto originale è distribuito con licenza MIT e attribuito a Mark Feldhousen.
+Il codice di questo adattamento HAOS è distribuito con licenza MIT. Il progetto usa l'immagine [`ghcr.io/felddy/foundryvtt:14.370.0`](https://github.com/felddy/foundryvtt-docker), il cui progetto originale è distribuito con licenza MIT e attribuito a Mark Feldhousen.
 
 Foundry Virtual Tabletop è software proprietario di Foundry Gaming LLC, non è incluso nella licenza MIT di questo repository e richiede una licenza Foundry valida. Consulta il file [`LICENSE`](LICENSE) per il testo completo, le attribuzioni e i termini applicabili.
