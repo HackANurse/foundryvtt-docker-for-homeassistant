@@ -44,6 +44,41 @@ Con `force_download: false`, i riavvii usano il pacchetto conservato in `/config
 
 Se utilizzi `foundry_release_url`, genera un nuovo URL temporaneo prima di forzare il download.
 
+## Aggiornamento manuale a una build scelta
+
+Prima di aggiornare crea un backup completo e arresta tutti i mondi. Nella
+scheda **Configurazione** puoi richiedere un singolo aggiornamento con:
+
+- `foundry_target_version`, per esempio `14.370`;
+- `foundry_release_url`, usando un nuovo URL temporaneo Node.js;
+- `install_target_version: true`, che avvia l'operazione una sola volta.
+
+Le combinazioni ammesse sono:
+
+- **versione e URL:** l'URL fornisce l'archivio, che deve corrispondere
+  esattamente alla versione indicata;
+- **solo versione:** l'add-on usa `foundry_username` e `foundry_password` per
+  ottenere il pacchetto esatto;
+- **solo URL:** la versione viene ricavata e verificata dall'archivio.
+
+L'add-on scarica ed estrae la nuova applicazione in un'area temporanea. Soltanto
+dopo la verifica promuove la nuova installazione, mantenendo quella precedente
+per il primo avvio. Se Foundry termina o non apre la porta entro 180 secondi,
+l'add-on ripristina automaticamente la versione precedente. `Data`, `Config`,
+`Backups` e `Logs` non vengono spostati o cancellati.
+
+Dopo un aggiornamento riuscito riporta `install_target_version` a `false`. Se
+rimane accidentalmente attivo, lo stato completato impedisce di ripetere lo
+stesso download ai riavvii. Gli URL temporanei possono scadere: generarne uno
+nuovo prima di ogni richiesta.
+
+Se il primo avvio fallisce, l'add-on non ritenta automaticamente: imposta
+`install_target_version: false`, salva e avvia una volta per azzerare lo stato;
+correggi URL o versione e riattiva poi il comando.
+
+Sono accettate soltanto build della generazione 14. Per una nuova generazione
+attendi un aggiornamento dell'add-on basato sull'immagine `felddy` compatibile.
+
 ## Aggiornamenti dalla UI di Foundry
 
 L'add-on lascia attiva la schermata **Aggiornamento software** di Foundry e
@@ -54,8 +89,10 @@ Prima di procedere crea un backup completo e arresta i mondi attivi. Aggiorna
 soltanto all'interno della generazione 14; per una nuova generazione attendi una
 versione dell'add-on basata sull'immagine `felddy` compatibile.
 
-L'opzione `force_download: true` rimuove l'applicazione persistente e reinstalla
-la versione fornita dall'immagine. Dopo il riavvio riportala a `false`.
+L'opzione `force_download: true` **non installa la versione più recente**:
+rimuove l'applicazione persistente e reinstalla la versione fornita
+dall'immagine dell'add-on. Non attivarla insieme a `install_target_version` e,
+dopo una reinstallazione, riportala a `false`.
 
 ## Cartelle condivise
 
